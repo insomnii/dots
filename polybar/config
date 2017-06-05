@@ -1,0 +1,317 @@
+[colors]
+
+foreground 	= #dfdfdf
+foreground-alt = #fff
+alert 		= #bd2c40
+
+background 	= ${xrdb:color0}
+background-alt = ${xrdb:color0}
+primary 	= ${xrdb:color3}
+secondary 	= ${xrdb:color3}
+mRed		= ${xrdb:color1}
+mWhite		= #bdc3c7
+mGreen		= #2ecc71
+mYellow		= #f1c40f
+mOrange		= #e67e22
+
+[bar/barBottom]
+monitor	= LVDS-1
+enable-ipc = true
+width	= 100%
+height	= 24
+bottom	= true
+
+offset-x = 0
+offset-y = 0
+
+tray-position 		= right
+tray-padding		= 2
+tray-detached		= false
+tray-transparent	= false
+tray-background		= ${colors.background}
+
+background			= ${colors.background}
+foreground			= ${colors.foreground}
+
+;border-top-size		= 2
+;border-top-color	= #444
+
+overline-size		= 2
+overline-color		= #444
+
+
+
+
+spacing				= 0
+padding-left		= 0
+padding-right		= 1
+module-margin-left	= 1
+module-margin-right	= 1
+
+
+font-0	= Fira Mono for Powerline:style=Regular:size=11;2
+font-1	= FontAwesome:size=12;2
+font-2	= Cousine for powerline:size=18;2
+font-3	= Material Icons:size=12;2
+
+; xwindow date volume mVol
+modules-left	= plaympc pausempc currentsong
+modules-center	=
+modules-right	= network mBacklight mVol battery
+
+[bar/barTop]
+
+monitor	= LVDS-1
+width	= 100%
+height	= 28
+bottom	= false
+
+offset-x = 0
+offset-y = 0
+
+tray-position 		= right
+tray-padding		= 2
+tray-detached		= false
+tray-transparent	= false
+tray-background		= ${colors.background}
+
+background			= ${colors.background}
+foreground			= ${colors.foreground}
+
+;border-top-size		= 2
+;border-top-color	= #444
+
+underline-size		= 4
+; overline-color	= #444
+
+
+
+
+spacing				= 0
+padding-left		= 0
+padding-right		= 1
+module-margin-left	= 0
+module-margin-right	= 0
+
+
+font-0	= Fira Mono for Powerline:style=Regular:size=11;2
+font-1	= FontAwesome:size=12;2
+font-2	= Cousine for powerline:size=18;2
+font-3	= Material Icons:size=12;2
+
+; xwindow date volume mVol
+modules-left	= i3
+modules-center	= xwindow
+modules-right	= memory cpu
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+
+
+; label-connected		=[%{A:nm-connection-editor &:}%essid%%{A}]
+
+;format-charging = <animation-charging> <label-charging>
+format-charging = %{A:/home/luis/.my_scripts/polybar/rofipower:}<animation-charging> <label-charging>%{A}
+format-charging-overline = ${colors.mYellow}
+
+format-discharging = %{A:/home/luis/.my_scripts/polybar/rofipower:}<ramp-capacity> <label-discharging>%{A}
+
+format-full = %{A:/home/luis/.my_scripts/polybar/rofipower:}<ramp-capacity> <label-full>%{A}
+format-full-overline = ${colors.mGreen}
+
+ramp-capacity-0 = 
+ramp-capacity-0-overline = ${colors.mRed}
+; ramp-capacity-0-foreground = #f53c3c
+
+ramp-capacity-1 = 
+ramp-capacity-1-overline = ${colors.mOrange}
+; ramp-capacity-1-foreground = #ffa900
+
+ramp-capacity-2 = 
+ramp-capacity-2-overline = ${colors.mYellow}
+ramp-capacity-3 = 
+ramp-capacity-3-overline = ${colors.mYellow}
+ramp-capacity-4 = 
+ramp-capacity-4-overline = ${colors.mGreen}
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+
+[module/i3]
+type			= internal/i3
+enable-scroll	= false
+
+ws-icon-default	= 
+
+
+label-focused			= %index%
+label-focused-underline	= ${colors.mRed}
+label-focused-padding	= 1
+label-focused-background= #505050
+
+label-unfocused			= %icon%
+label-unfocused-padding	= 1
+
+label-urgent			= %index%
+label-urgent-padding	= 0
+label-urgent-background	= #c0392b
+
+lable-visible			= %index%
+label-visible-padding	= 1
+
+[module/network]
+type		= internal/network
+interface	= wlp3s0
+interval	= 3.0
+
+
+label-connected		=[%{A:networkmanager_dmenu &:}%essid%%{A}]
+label-connected-overline = ${colors.mGreen}
+
+label-disconnected	= [%{A:networkmanager_dmenu &:}no-wifi%{A}]
+label-disconnected-overline	= ${colors.mRed}
+
+
+
+[module/xwindow]
+type	= internal/xwindow
+
+
+format-background	= ${colors.background}
+format-underline		= ${colors.mRed}
+format-foreground	= ${colors.foreground}
+
+
+format-padding		= 1
+
+label				=  %title% 
+label-maxlen		= 50
+
+[module/mVol]
+type = internal/volume
+
+format-volume = <label-volume>
+
+label-volume = [ %percentage%]
+label-volume-foreground = ${root.foreground}
+label-volume-overline	= ${colors.mGreen}
+
+; format-muted-prefix = ""
+format-muted-foreground = ${colors.foreground-alt}
+format-muted-overline	= ${colors.mYellow}
+label-muted = [muted]
+
+[module/mBacklight]
+
+type	= internal/backlight
+;output	= LVDS-1
+card	= intel_backlight
+
+enable_scroll	= true
+
+format	= <label>
+format-background	= ${colors.background}
+format-overline		= ${colors.mWhite}
+
+label	= [ %percentage% ]
+
+
+[module/pMenu]
+
+type = custom/menu
+
+menu-0-0 		= Browsers
+menu-0-0-exec	= menu-open-1
+menu-1-0		= Chromium
+menu-1-0-exec	= chromium &
+
+label-open		= Apps
+label-close		= X
+
+label-separator = |
+
+[module/cpu]
+type		= internal/cpu
+interval	= 0.5
+
+format		= [<label> <ramp-coreload>]
+
+
+ramp-coreload-0 		= ▁
+ramp-coreload-0-foreground	= ${colors.mGreen}
+ramp-coreload-1 		= ▂
+ramp-coreload-1-foreground	= ${colors.mGreen}
+ramp-coreload-2 		= ▃
+ramp-coreload-2-foreground	= ${colors.mYellow}
+ramp-coreload-3 		= ▄
+ramp-coreload-3-foreground	= ${colors.mYellow}
+ramp-coreload-4 		= ▅
+ramp-coreload-4-foreground	= ${colors.mOrange}
+ramp-coreload-5 		= ▆
+ramp-coreload-5-foreground	= ${colors.mOrange}
+ramp-coreload-6 		= ▇
+ramp-coreload-6-foreground	= ${colors.mRed}
+ramp-coreload-7 		= █
+ramp-coreload-7-foreground	= ${colors.mRed}
+
+[module/memory]
+type		= internal/memory
+interval	= 3
+format		= [ <label><bar-used>]
+
+label		=
+; %gb_used%
+
+bar-used-indicator =
+bar-used-width = 25
+bar-used-foreground-0 = ${colors.mGreen}
+bar-used-foreground-1 = ${colors.mYellow}
+bar-used-foreground-2 = ${colors.mOrange}
+bar-used-foreground-3 = ${colors.mRed}
+bar-used-fill = 
+bar-used-empty = 
+bar-used-empty-foreground = #444444
+
+[module/plaympc]
+type	= custom/script
+exec	= echo " "
+click-left	= mpc play
+format = []
+
+[module/pausempc]
+type	= custom/script
+exec	= echo " "
+click-left	= mpc pause
+format = []
+
+[module/pause]
+type = custom/ipc
+hook-0 = mpc current
+hook-3 = echo
+initial = 1
+
+[module/currentsong]
+type	= custom/script
+
+exec	= /home/luis/.my_scripts/polybar/getsong
+tail	= true
+interval = 2
