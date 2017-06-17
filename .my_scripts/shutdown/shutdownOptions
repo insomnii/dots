@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+#!/use/bin/bash
+
+o1="Shutdown PC\n"
+o2="Restart PC"
+echo -e $o1$o2

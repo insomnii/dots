@@ -1,0 +1,11 @@
+~!/usr/bin/bash
+~!/usr/bin/zsh
+
+# Terminate bars already running
+killall -q polybar
+
+#wait until process has been shut donw
+while pgrep -x polybar >/dev/null; do sleep 1; done
+
+#launch bars
+polybar bar1 &

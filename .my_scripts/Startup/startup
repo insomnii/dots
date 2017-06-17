@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+#!/usr/bin/zsh
+
+
+(~/wal -a 80 -i ~/Pictures/forest_blue_red.jpg &)
+(compton --config ~/.config/compton/compton.conf &)
+(~/.startup/polybarStart &)

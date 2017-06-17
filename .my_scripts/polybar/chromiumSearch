@@ -1,0 +1,38 @@
+#!/bin/bash
+#!/bin/zsh
+# b81e1e Red
+
+WEBSITES='Github\nReddit\nYoutube\nEmail (Live.com)\nNetflix'
+COLORWINDOW='#222222, #202022'
+FONT='Ubuntu Mono derivative Powerline 18'
+
+
+ROFI=`echo -e $WEBSITES | rofi -dmenu -i -p 'chromium: ' -lines 5 -columns 1 -bw 1 -line-margin 0 -hide-scrollbar -width 30 -height 32 -font "$FONT" -yoffset -28 -color-window "$COLORWINDOW" | awk '{print $1}'`
+
+if [ ${#ROFI} -gt 3 ]
+then
+  case $ROFI in
+    Github)
+      CMD="chromium https://github.com/insomnii/"
+      ;;
+
+    Reddit)
+      CMD="chromium reddit.com"
+      ;;
+    Youtube)
+      CMD="chromium youtube.com"
+      ;;
+
+    Email)
+      CMD="chromium Live.com"
+      ;;
+    Netflix)
+      CMD="chromium netflix.com"
+      ;;
+    *)
+      CMD="chromium $ROFI"
+      ;;
+  esac
+fi
+echo $CMD
+$CMD

@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+#!/usr/bin/zsh
+
+if [ "$(playerctl status)" = "Playing" ]; then
+  SONG=$(playerctl metadata xesam:title)
+  ARTIST=$(exec playerctl metadata xesam:artist)
+  echo "$ARTIST - $SONG"
+else
+  echo "No Song Currently Playing"
+fi

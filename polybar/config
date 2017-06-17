@@ -55,7 +55,7 @@ font-2	= Cousine for powerline:size=18;2
 font-3	= Material Icons:size=12;2
 
 ; xwindow date volume mVol
-modules-left	= plaympc pausempc currentsong
+modules-left	= plaympc  currentsong songPrev songNext
 modules-center	=
 modules-right	= network mBacklight mVol battery
 
@@ -294,24 +294,23 @@ bar-used-empty-foreground = #444444
 [module/plaympc]
 type	= custom/script
 exec	= echo " "
-click-left	= mpc play
-format = []
+click-left	= playerctl play-pause
+format = []
 
-[module/pausempc]
+[module/songNext]
 type	= custom/script
 exec	= echo " "
-click-left	= mpc pause
-format = []
+click-left	= playerctl next
+format = []
 
-[module/pause]
-type = custom/ipc
-hook-0 = mpc current
-hook-3 = echo
-initial = 1
+[module/songPrev]
+type  = custom/script
+exec  = echo " "
+click-left  = player previous
+format = []
 
 [module/currentsong]
 type	= custom/script
-
-exec	= /home/luis/.my_scripts/polybar/getsong
+exec	= /home/luis/.config/.my_scripts/polybar/getsong
 tail	= true
 interval = 2

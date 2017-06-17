@@ -1,0 +1,35 @@
+#!/bin/sh
+# b81e1e Red
+
+POWER="Log Out\nPower Off\nReboot\nSleep\n"
+COLORWINDOW='#222222, #202022'
+FONT='Ubuntu Mono derivative Powerline 14'
+
+
+ROFI=`echo -e $POWER | rofi -dmenu -i -p 'POWER:' -lines 4 -columns 1 -bw 2 -line-margin 4 -hide-scrollbar -width 8 -height 30 -font "$FONT" -location 5 -yoffset -28 -color-window "$COLORWINDOW" | awk '{print $1}'`
+
+
+if [ ${#ROFI} -gt 0 ]
+then
+    case $ROFI in
+    Log)
+        #MESG="Quitting BSPWM..."
+        CMD="bspc quit"
+        ;;
+    Power)
+        #MESG="Powering off..."
+        CMD="poweroff"
+        ;;
+    Reboot)
+        #MESG="Rebooting..."
+        CMD="reboot"
+        ;;
+    Suspend)
+        #MESG="Entering sleep mode..."
+        CMD="systemctl suspend"
+        ;;
+
+    esac
+fi
+
+$CMD

@@ -1,0 +1,15 @@
+#!/usr/bin/zsh
+#!/use/bin/bash
+
+while [ -z "$1" ]; do
+	read sel
+	1=${sel}
+done
+
+if [ $1 = "Shutdown PC" ]; then
+	shutdown -h
+elif [ $1 = "Restart PC" ]; then
+	reboot
+fi
+
+
